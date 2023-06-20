@@ -1,0 +1,55 @@
+:root {
+  font-family: Inter, system-ui, Avenir, Helvetica, Arial, sans-serif;
+  line-height: 1.5;
+  font-weight: 400;
+
+
+  font-synthesis: none;
+  text-rendering: optimizeLegibility;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  /* for removing the highlight */
+  -webkit-tap-highlight-color: transparent; 
+  tap-highlight-color: transparent;
+
+  --clr-p: hsl(254, 100%, 80% , 70% );
+  --clr-p-hover: hsl(265, 100%, 90% , 80%);
+  --clr-p-active: hsla(260, 100%, 100%);
+  --clr-s: hsl(88, 70%, 40% );
+  --clr-e: hsl(0, 100%, 60% );
+  --clr-1: #ffffffde;
+  --clr-2: #242424;
+  --clr-3: #1a1a1a;
+  --clr-shadow:rgba(0,0,0,0.4);
+  color-scheme: light dark;
+  color: var(--clr-1);
+  background-color: var(--clr-2);
+}
+@media (prefers-color-scheme: light) {
+  :root {
+    --clr-p: hsl(254, 100%, 80% , 70% );
+    --clr-p-hover: hsl(265, 100%, 90% , 80%);
+    --clr-p-active: hsla(260, 100%, 100%);
+    --clr-s: hsl(88, 100%, 70% );
+    --clr-e: hsl(0, 100%, 60% );
+    --clr-1: #1a1a1a;
+    --clr-2: #efefef;
+    --clr-3: #ffffff;
+    --clr-shadow:rgba(0,0,0,0.2);
+  }
+}
+/* layouts */
+body {
+  margin: 0;
+  display: flex;
+  place-items: center;
+  min-width: 320px;
+  min-height: 100svh;
+}
+
+#app {
+  max-width: 1280px;
+  margin: 0 auto;
+  padding: 2rem;
+  text-align: center;
+}
