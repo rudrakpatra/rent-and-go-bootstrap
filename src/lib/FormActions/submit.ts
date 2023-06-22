@@ -1,14 +1,11 @@
 
 
-export function validation(element:HTMLElement,props:{title:string}) {
+export function submit(element:HTMLElement) {
     function mouseOver(event) {
-		element.setAttribute('title', "");
 	}
 	function onInvalid(event) {
-		event.target.setAttribute('title', props.title);
 	}
 	function onBlur(event) {
-		event.target.setAttribute('title', "");
 	}
     element.addEventListener('mouseover', mouseOver);
 	element.addEventListener('invalid', onInvalid);
