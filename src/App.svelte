@@ -38,8 +38,18 @@
   }}>
   <NumberField label="Age" min={18} max={120} />
   <NumberField label="Pay" value={0.5} min={0} max={1} step={0.02} feedback={"intial label"}/>
+  <TextField label="Occupation" value={""} 
+  suggestions={["Doctor","Doctorate","Scientist"]}
+  customValidation={(value)=>{
+    if(value=="Doctor")
+    return {
+      feedbackType:"warning",
+      feedback:"You are not a doctor!",
+      suggestion:"Doctorate"
+    }
+  }}
+  />
   <!--
-  <TextField label="text field" value={"text field value"}/>
   <TextField label="text field" value={"text field value"}/>
   <PasswordField label="password field" value={"password field value"}/>
   <DateField label="date field" value={new Date()}/>
