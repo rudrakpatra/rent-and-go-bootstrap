@@ -4,7 +4,7 @@
     export let label="";
     export let value:string="";
     // $:console.log(`value="${value}"`);
-    export let maxlength:number=34;
+    export let maxlength:number=32;
     export let suggestions:Array<string>=[];
     let touched=false;
     let focused=false;
@@ -168,6 +168,8 @@
             border:none;
             background-color:transparent;
             font-size: 1rem;
+
+            text-overflow: ellipsis;
 
             //tick up and down
             transition: transform 0.1s ease-in-out;
