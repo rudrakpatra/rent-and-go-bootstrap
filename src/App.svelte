@@ -37,7 +37,7 @@
     //do your thing heres
   }}>
   <NumberField label="Age" min={18} max={120} />
-  <NumberField label="Pay" value={0.5} min={0} max={1} step={0.02} feedback={"intial label"}/>
+  <NumberField label="Pay in Etheruem" value={0.5} min={0} max={1} step={0.02} feedback={"we accept Eth only"}/>
   <TextField label="Occupation" value={""} 
   suggestions={["Doctor","Doctorate","Scientist"]}
   customValidation={(value)=>{

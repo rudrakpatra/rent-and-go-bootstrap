@@ -116,7 +116,11 @@
         on:keydown={(e)=>{
             typing=true;
             if (["e"].includes(e.key))e.preventDefault();
-            else if(e.key=="-" && value){value=-value;e.preventDefault();}
+            else if(e.key=="-" && value){
+                value=-value;
+                updateFeedback(value?.toString());
+                e.preventDefault();
+            }
             else if(e.key=="ArrowUp"){tickUp();e.preventDefault();}
             else if(e.key=="ArrowDown"){tickDown();e.preventDefault();}
             else if(e.key=="Enter"){
