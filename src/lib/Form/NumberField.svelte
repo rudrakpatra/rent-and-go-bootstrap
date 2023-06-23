@@ -8,7 +8,6 @@
     export let max=1e18;
     export let step=1;
     export let maxlength=12;
-    // export let allowDecimal=step<1;
     let touched=false;
     let focused=false;
     let typing=false;
@@ -19,49 +18,47 @@
     let fractionalDigitsOf=(value:number)=>{
         return value.toString().split(".")[1]?.length||0;
     }
+    let clampValue=()=>{
+        // console.log("clampValue",value);
+        if(value>max)
+            value=max;
+        else if(value<min)
+            value=min;
+    }
     let addToValueProperly=(summand:number)=>{
         // console.log("addToValueProperly",value);
         if(value==null)
-            value=summand;
-        else if(value+summand>max)
-            value=max;
-        else if(value+summand<min)
-            value=min;
+            value=summand
         else{
             let fractionalDigits=Math.max(fractionalDigitsOf(value),fractionalDigitsOf(summand));
             value=parseFloat((value+summand).toFixed(fractionalDigits))
+            clampValue();
         }
     }
     /**
-     * judges the value and updates the feedback,adds ticks for animation
-     * @param value
+     * judges the value and updates the feedback accordingly, adds ticks for animation
+     * @param value the value to judge
      * @returns a suitable value for the input field, null means no suitable value is possible
      */
-    let updateFeedback: (value: any) =>string|null=(value)=>{
+    let updateFeedback=(value:string)=>{
         if(value==null){
             feedbackType="warning";
             feedback=label+" cannot be empty!";
             return null;
         }
-        else if(value>max){
+        else if(Number(value)>max){
             feedbackType="warning";
             feedback=label +" must be less than or equal to "+max+"!";
             if(typing){
-                tick="tick-left";
-                setTimeout(()=>{
-                    tick="";
-                },200);
+                return null;
             }
             return max.toString();
         }
-        else if(value<min){
+        else if(Number(value)<min){
             feedbackType="warning";
             feedback=label +" must be greater than or equal to "+min+"!";
             if(typing){
-                tick="tick-left";
-                setTimeout(()=>{
-                    tick="";
-                },200);
+                return null;
             }
             return min.toString();
         }
@@ -84,16 +81,16 @@
     }
     //update value
     let tickUp=()=>{
-        updateFeedback(value+step);
         addToValueProperly((value==null)?min:step);
+        updateFeedback((value).toString());
         tick="tick-up";
         setTimeout(()=>{
             tick="";
         },200);
     }
     let tickDown=()=>{
-        updateFeedback(value-step);
         addToValueProperly((value==null)?max:-step);
+        updateFeedback((value).toString());
         tick="tick-down";
         setTimeout(()=>{
             tick="";
@@ -108,8 +105,8 @@
         on:focus={()=>{focused=true;touched=true}}
         on:blur={()=>{
             focused=false;
-            updateFeedback(value||null);
-            addToValueProperly(0);
+            clampValue();
+            updateFeedback(value.toString());
         }}
         on:wheel|preventDefault={(e)=>{
             //@ts-ignore
@@ -125,6 +122,10 @@
             else if(e.key=="-" && value){value=-value;e.preventDefault();}
             else if(e.key=="ArrowUp"){tickUp();e.preventDefault();}
             else if(e.key=="ArrowDown"){tickDown();e.preventDefault();}
+            else if(e.key=="Enter"){
+                clampValue();
+                updateFeedback(value.toString());
+            }
         }}
         on:keyup={(e)=>{
             typing=false;
@@ -133,17 +134,12 @@
             let v=updateFeedback(e.currentTarget.value||null);
             if(v!=null)e.currentTarget.value=v.toString();
         }}
-        on:change={(e)=>{
-            updateFeedback(e.currentTarget.value||null);
-            addToValueProperly(0);
-            e.currentTarget.value=value.toString();
-        }}
         class="input {tick}" type="number" 
         placeholder=" " title=" "
         inputmode="numeric"
         bind:value {step} {min} {max}
     />
-    <div class="label" class:aside={focused||value}>{label.slice(0,40)}</div>
+    <div class="label" class:aside={focused||value!=null}>{label.slice(0,40)}</div>
     {#key feedback}
         <div class="feedback" transition:fly={{y:2,duration:200}}>{feedback}</div>
     {/key}

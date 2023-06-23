@@ -31,12 +31,12 @@
 </script>
 
 <Form 
-  label="myform"
+  label="We would love to know about YOU..."
   on:submit={(formData)=>{
     console.log(formData);
     //do your thing heres
   }}>
-  <NumberField label="Age" min={-100} max={10}/>
+  <NumberField label="Age" min={18} max={120}/>
   <NumberField label="Pay" value={0.5} min={0} max={1} step={0.02} feedback={"intial label"}/>
   <!--
   <TextField label="text field" value={"text field value"}/>

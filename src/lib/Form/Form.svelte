@@ -3,8 +3,10 @@
 </script>
 
 <div>
-    {label}
-    <slot></slot>
+    <h3>{label}</h3>
+    <span>
+        <slot></slot>
+    </span>
 </div>
 <style>
     div{
@@ -12,7 +14,18 @@
         text-align: start;
 
         display: flex;
+        flex-wrap: wrap;
         flex-direction: column;
-        gap:0.5rem;
+    }
+    span{
+        display: flex;
+        flex-direction: column;
+        gap:0.5em;
+    }
+    h1,h2,h3,h4{
+        margin:0.5em 0 0 0;
+        padding-left:0.25em;
+        opacity: 0.8;
+        white-space: pre-wrap;
     }
 </style>
