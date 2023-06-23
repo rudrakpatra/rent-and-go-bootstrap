@@ -156,6 +156,8 @@
         border: 2px solid var(--clr-p);
         border-radius: 5px;
 
+        text-overflow: ellipsis;
+        
         margin-top: 0.5rem;
         *{
             position: absolute;
