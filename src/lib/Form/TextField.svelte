@@ -55,7 +55,7 @@
     let tickUp=()=>{
         // console.log("tickUp",value,inputEl.value);
         index=(index+suggestions.length+1)%suggestions.length;
-        value=suggestions[index];
+        value=suggestions[index]||value;
         updateFeedback(value);
         tick="tick-up";
         setTimeout(()=>{
@@ -65,7 +65,7 @@
     let tickDown=()=>{
         // console.log("tickDown",value,inputEl.value);
         index=(index+suggestions.length-1)%suggestions.length;
-        value=suggestions[index];
+        value=suggestions[index]||value;
         updateFeedback(value);  
         tick="tick-down";
         setTimeout(()=>{
