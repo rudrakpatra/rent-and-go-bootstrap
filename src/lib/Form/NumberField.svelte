@@ -3,7 +3,7 @@
 
     export let label="";
     export let value:number=null;
-    // $:console.log("value",value);
+    $:console.log("value",value);
     export let min=-1e18;
     export let max=1e18;
     export let step=1;
@@ -16,7 +16,7 @@
     let feedbackType:""|"info"|"warning"|"success"|"error"="";
 
     let clampValue=()=>{
-        // console.log("clampValue",value);
+        console.log("clampValue",value);
         if(value>max)
             value=max;
         else if(value<min)
@@ -28,7 +28,7 @@
      * @returns a suitable value for the input field, null means no suitable value is possible
      */
     let updateFeedback=(value:string)=>{
-        // console.log("updateFeedback",value);
+        console.log("updateFeedback",value);
         if(value==null){
             feedbackType="warning";
             feedback=label+" cannot be empty!";
@@ -70,20 +70,22 @@
     let inputEl:HTMLInputElement;
     //update value
     let tickUp=()=>{
-        // console.log("tickUp",value,inputEl.value);
+        console.log("tickUp",value,inputEl.value);
         if(value)inputEl.stepUp();
         else value=min;   
-        updateFeedback((value).toString());
+        updateFeedback(inputEl.value);
+        value=Number(inputEl.value);
         tick="tick-up";
         setTimeout(()=>{
             tick="";
         },200);
     }
     let tickDown=()=>{
-        // console.log("tickDown",value,inputEl.value);
+        console.log("tickDown",value,inputEl.value);
         if(value)inputEl.stepDown();
         else value=max; 
-        updateFeedback((value).toString());  
+        updateFeedback(inputEl.value);
+        value=Number(inputEl.value);
         tick="tick-down";
         setTimeout(()=>{
             tick="";
@@ -126,7 +128,7 @@
         }}
         on:input|preventDefault={(e)=>{
             let v=updateFeedback(inputEl.value||null);
-            if(v!=null)inputEl.value=v.toString();
+            if(v)inputEl.value=v.toString();
         }}
         class="input {tick}" type="number" 
         placeholder=" " title=" "
