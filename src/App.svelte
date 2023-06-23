@@ -51,8 +51,8 @@
   />
   <TextField label="text field" value={"text field value"}/>
   <PasswordField label="password field" value={"password field value"}/>
-  <!--
   <DateField label="date field" value={new Date()}/>
+  <!--
   <TimeField label="time field" />
   <Group label="group">
     <DateField label="date field"/>

@@ -17,7 +17,8 @@
 
     let clampValue=()=>{
         // console.log("clampValue",value);
-        if(value>max)
+        if(value==null)return;
+        else if(value>max)
             value=max;
         else if(value<min)
             value=min;
@@ -27,7 +28,7 @@
      * @param value the value to judge
      * @returns a suitable value for the input field, null means no suitable value is possible
      */
-    let updateFeedback=(value:string)=>{
+    let updateFeedback=(value:string|null)=>{
         // console.log("updateFeedback",value);
         if(value==null){
             feedbackType="warning";
@@ -101,7 +102,8 @@
         on:blur={()=>{
             focused=false;
             clampValue();
-            updateFeedback(value.toString());
+            console.log("blur",value);
+            updateFeedback(value?.toString());
         }}
         on:wheel|preventDefault={(e)=>{
             //@ts-ignore
@@ -119,7 +121,7 @@
             else if(e.key=="ArrowDown"){tickDown();e.preventDefault();}
             else if(e.key=="Enter"){
                 clampValue();
-                updateFeedback(value.toString());
+                updateFeedback(value?.toString());
                 alert(value);
             }
         }}
