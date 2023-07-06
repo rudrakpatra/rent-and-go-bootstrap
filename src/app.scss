@@ -1,0 +1,43 @@
+@import "bootstrap/scss/bootstrap";
+:root {
+  font-family: system-ui, sans-serif;
+  line-height: 1.5;
+  font-weight: 400;
+
+
+  font-synthesis: none;
+  text-rendering: optimizeLegibility;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  /* for removing the highlight */
+  -webkit-tap-highlight-color: transparent; 
+  tap-highlight-color: transparent;
+}
+/* layouts */
+body {
+  margin: 0;
+  display: flex;
+  place-items: center;
+  justify-content: center;
+  min-width: 320px;
+  min-height: 100svh;
+}
+
+/* Chrome, Safari, Edge, Opera */
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+-webkit-appearance: none;
+margin: 0;
+}
+
+/* Firefox */
+input[type=number] {
+-moz-appearance: textfield;
+}
+
+
+@media (prefers-color-scheme: dark) {
+  .invertOnDark {
+    filter: invert(1);
+  }
+}

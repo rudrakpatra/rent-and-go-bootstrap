@@ -4,20 +4,23 @@
     let progress=0;
     //mocking the progress bar
     let interval=setInterval(()=>{
-        progress+=Math.random()*Math.random();
+        progress+=Math.random()*40;
         if(progress>=100){
+            progress=100;
             clearInterval(interval);
         }
-    },10);
+    },1000);
 </script>
 
 {#if progress>=100}
     <slot></slot>
 {:else}
-<div class="overlay" transition:fly={{y:-10}}>
-    <img src={Logo} alt="rent and go" width=100px/>
-    <div class="progress-bar">
-        <div class="progress" style={`width:${progress}%`}></div>
+<div class="overlay bg-dark" transition:fly={{y:-10}}>
+    <div class="m-auto">
+        <img src={Logo} alt="logo" width="100" height="100">
+    </div>
+    <div class="progress" role="progressbar" aria-label="Loading Screen" aria-valuenow={progress} aria-valuemin={0} aria-valuemax={100}>
+        <div class="progress-bar"style="width:{progress}%" ></div>
     </div>
 </div>
 {/if}
@@ -26,26 +29,15 @@
     .overlay{
         position: fixed;
         inset:0;
-        height: 100vh;
-        width: 100vw;
+        min-height: 100svh;
+        min-width: 100vw;
         display: grid;
         place-content: center;
-        background-color:var(--clr-2);
-        img{
-            margin:.5rem auto;
-        }
-        .progress-bar{
-            user-select: none;
-            width:200px;
-            height:2px;
-            background-color:var(--clr-white);
-            border-radius:5px;
-            .progress{
-                height:100%;
-                background-color:var(--clr-p);
-                border-radius:5px;
-            }
-        }
+        text-align: center;
+        z-index: 1000;
     }
-
+    .progress{
+        width:350px;
+        height:2px;
+    }
 </style>
