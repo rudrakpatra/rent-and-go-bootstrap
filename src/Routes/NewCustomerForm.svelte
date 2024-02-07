@@ -53,7 +53,7 @@
         novalidate
         >
         <h4 class="mt-5 mb-0">
-            Personal Details
+            Personal Details:
         </h4>
         <div class="mt-3 col-md-4">
             <label for="firstName" class="form-label">First Name*</label>
@@ -194,6 +194,6 @@
     .frame{
         max-width: 1280px;
         margin: 0 auto;
-        padding: 2rem;
+        padding: 4rem;
     }
 </style>
